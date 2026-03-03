@@ -13,7 +13,7 @@ const createUsuario = async (req: Request, res: Response, next: NextFunction) =>
 
     try {
         const savedUsuario: IUsuarioModel = await usuario.save();
-        return res.status(201).json({ usuario: savedUsuario });
+        return res.status(201).json(savedUsuario);
     } catch (error) {
         return res.status(500).json({ error });
     }
@@ -24,7 +24,7 @@ const readUsuario = async (req: Request, res: Response, next: NextFunction) => {
 
     try {
         const usuario: IUsuarioModel | null = await Usuario.findById(usuarioId).populate('organizacion');
-        return usuario ? res.status(200).json({ usuario }) : res.status(404).json({ message: 'not found' });
+        return usuario ? res.status(200).json(usuario) : res.status(404).json({ message: 'not found' });
     } catch (error) {
         return res.status(500).json({ error });
     }
@@ -33,7 +33,7 @@ const readUsuario = async (req: Request, res: Response, next: NextFunction) => {
 const readAll = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const usuarios: IUsuarioModel[] = await Usuario.find();
-        return res.status(200).json({ usuarios });
+        return res.status(200).json(usuarios);
     } catch (error) {
         return res.status(500).json({ error });
     }
@@ -47,7 +47,7 @@ const updateUsuario = async (req: Request, res: Response, next: NextFunction) =>
         if (usuario) {
             usuario.set(req.body);
             const savedUsuario: IUsuarioModel = await usuario.save();
-            return res.status(201).json({ usuario: savedUsuario });
+            return res.status(201).json(savedUsuario);
         } else {
             return res.status(404).json({ message: 'not found' });
         }
@@ -61,7 +61,7 @@ const deleteUsuario = async (req: Request, res: Response, next: NextFunction) =>
 
     try {
         const usuario: IUsuarioModel | null = await Usuario.findByIdAndDelete(usuarioId);
-        return usuario ? res.status(201).json({ usuario, message: 'Deleted' }) : res.status(404).json({ message: 'not found' });
+        return usuario ? res.status(201).json(usuario) : res.status(404).json({ message: 'not found' });
     } catch (error) {
         return res.status(500).json({ error });
     }

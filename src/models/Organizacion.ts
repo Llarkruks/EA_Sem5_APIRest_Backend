@@ -1,7 +1,8 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema, Types } from 'mongoose';
 
 export interface IOrganizacion {
     name: string;
+    usuarios: string[] | Types.ObjectId[];
 }
 
 export interface IOrganizacionModel extends IOrganizacion, Document {}
